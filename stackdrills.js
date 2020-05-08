@@ -40,6 +40,11 @@ function main() {
   starTrek.push("Spock");
   starTrek.push("McCoy");
   starTrek.push("Scotty");
+  //printStack(starTrek);
+  //peek(starTrek);
+  //isEmpty(starTrek);
+  starTrek.pop("Scotty");
+  starTrek.pop("McCoy");
   printStack(starTrek);
 
 }
@@ -59,3 +64,18 @@ function printStack(stack){
   }
 
 }
+//look at top 
+function peek(stack) {
+  console.log(stack.top.data);
+}
+
+function isEmpty(stack){
+  if(stack.top === null){
+    console.log(stack, 'is empty');
+    return ;
+  } else{
+    console.log(stack, 'is not empty');
+    return;
+  }
+}
+
