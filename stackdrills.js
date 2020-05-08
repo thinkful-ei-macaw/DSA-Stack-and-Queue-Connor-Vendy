@@ -79,3 +79,20 @@ function isEmpty(stack){
   }
 }
 
+function is_palindrome(s) {
+  const s1 = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  const s2 = s1;
+  // pop each letter off s and push to stack1
+  
+  // unshift each letter from s and push to stack2
+
+  // compare stacks 1 and 2
+
+  // stack1 === stack2, then it is a palindrome, else not 
+}
+
+// True, true, true, false
+console.log(is_palindrome("dad"));
+console.log(is_palindrome("A man, a plan, a canal: Panama"));
+console.log(is_palindrome("1001"));
+console.log(is_palindrome("Tauhida"));
