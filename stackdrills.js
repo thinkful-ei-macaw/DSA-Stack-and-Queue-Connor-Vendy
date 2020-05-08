@@ -43,10 +43,17 @@ function main() {
   //printStack(starTrek);
   //peek(starTrek);
   //isEmpty(starTrek);
-  starTrek.pop("Scotty");
-  starTrek.pop("McCoy");
-  printStack(starTrek);
+  // starTrek.pop("Scotty");
+  // starTrek.pop("McCoy");
+  // printStack(starTrek);
 
+  // console.log(is_palindrome("dad"));
+  // console.log(is_palindrome("A man, a plan, a canal: Panama"));
+  // console.log(is_palindrome("1001"));
+  // console.log(is_palindrome("Tauhida"));
+
+  //console.log(matchParenthesis('VENDY IS A DATA (((( STRUCTURES ))) EXPERT'));
+  console.log(printStack(sortStack(starTrek)));
 }
 
 main();
@@ -66,7 +73,10 @@ function printStack(stack){
 }
 //look at top 
 function peek(stack) {
-  console.log(stack.top.data);
+  if (stack.top) {
+    return stack.top.data;
+  }
+  return null;
 }
 
 function isEmpty(stack){
@@ -81,18 +91,71 @@ function isEmpty(stack){
 
 function is_palindrome(s) {
   const s1 = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-  const s2 = s1;
-  // pop each letter off s and push to stack1
-  
-  // unshift each letter from s and push to stack2
 
-  // compare stacks 1 and 2
+  let stack1 = new Stack();
 
-  // stack1 === stack2, then it is a palindrome, else not 
+  if(s.length === 0){
+    return 'empty string';
+  }
+
+  for (let i = 0; i < s1.length; i++) {
+    stack1.push(s1[i]);
+  }
+
+  for (let i = 0; i < s1.length; i++) {
+    if (s1[i] !== stack1.pop()) {
+      return 'not a palindrome';
+    }
+  }
+
+  return 'is a palindrome';
 }
 
-// True, true, true, false
-console.log(is_palindrome("dad"));
-console.log(is_palindrome("A man, a plan, a canal: Panama"));
-console.log(is_palindrome("1001"));
-console.log(is_palindrome("Tauhida"));
+function matchParenthesis(exp) {
+  let stack = new Stack();
+  for(let i = 0; i < exp.length; i++){
+  //at each index check if ( or )
+    //if ( push
+    if(exp[i]==='('){
+      stack.push(exp[i]);
+    }
+    // if ) peek & pop
+    if(exp[i] === ')'){
+      if (peek(stack) === '(') {
+        stack.pop();
+      } else {
+        return 'you are missing a (';
+      }
+    }
+  }
+  if (peek(stack) === '(') {
+    return 'missing a )';
+  }
+  return 'all parens accounted for';
+}
+
+function sortStack(stack) {
+  let sortedStack = new Stack();
+  
+  while (peek(stack)) {
+    //save first item in a temp var
+    let temp = stack.pop();  
+
+    while(!isEmpty(sortedStack) && temp > peek(sortedStack)){
+      stack.push(sortedStack.pop())
+    }
+    sortedStack.push(temp)
+    console.log('this is a ',sortedStack);
+  }
+  
+console.log('this is the',sortedStack)
+return sortedStack;
+  // //keep track of new top in stack
+  // let newTop = stack.top.data;
+  // //need to check the size of the items
+  // if(temp.length > newTop.length){
+  //   sortedStack.push(newTop)
+  // }
+  // console.log('Top of stack', temp)
+  // return sortedStack;
+}
